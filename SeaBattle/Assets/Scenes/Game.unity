@@ -699,7 +699,7 @@ Transform:
   m_GameObject: {fileID: 672318422}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.95, z: 0}
+  m_LocalPosition: {x: 0, y: -5.21, z: 0}
   m_LocalScale: {x: 0.7, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -743,7 +743,7 @@ Transform:
   m_GameObject: {fileID: 920769702}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.35, y: -1.08, z: 0.010498323}
+  m_LocalPosition: {x: -14.67, y: -1.04, z: 0.010498323}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -989,9 +989,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tegForShipAwake: {fileID: 920769702}
   <_shipPrefabs>k__BackingField:
-  - {fileID: 3096238504762005895, guid: 7d1053717fa918d468990969df7e54f2, type: 3}
-  - {fileID: 4484751598618232370, guid: 90692e9c38d5b5140baf597a49cf0639, type: 3}
-  - {fileID: 3268656813809490658, guid: 713e3afe7251c1d49a1eec9389e9d424, type: 3}
+  - {fileID: 1673375593716620781, guid: 50855cb292f802e4086df1e8647786bf, type: 3}
+  - {fileID: 8391683343022483388, guid: 794caea2938e89a4aa652d3d559f3d7d, type: 3}
 --- !u!4 &1879680847
 Transform:
   m_ObjectHideFlags: 0
