@@ -991,6 +991,7 @@ MonoBehaviour:
   <_shipPrefabs>k__BackingField:
   - {fileID: 1673375593716620781, guid: 50855cb292f802e4086df1e8647786bf, type: 3}
   - {fileID: 8391683343022483388, guid: 794caea2938e89a4aa652d3d559f3d7d, type: 3}
+  - {fileID: 7451585174917906913, guid: 7a722f672ac427249a33040960adb6e5, type: 3}
 --- !u!4 &1879680847
 Transform:
   m_ObjectHideFlags: 0
