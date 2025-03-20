@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float _damage;
     private void Start()
     {
-        Tween bulletScale = transform.DOScale(0.2f, 5);
+        Tween bulletScale = transform.DOScale(0.01f, 4);
         bulletScale.SetLink(gameObject);
     }
     void Update()

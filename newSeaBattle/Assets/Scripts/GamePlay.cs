@@ -8,18 +8,28 @@ using UnityEngine.U2D;
 public class GamePlay : MonoBehaviour
 {
     [SerializeField] private Light2D _light;
+    [SerializeField] private bool _isNight;
+    [SerializeField] private ParticleSystem _rainFall;
     private float _maxTimerForLight;
     private float _timer;
     private void Start()
     {
-        _maxTimerForLight = Random.Range(2.1f, 4.1f);
+        if (_isNight)
+        {
+            _rainFall.Play();
+            _light.intensity = 0.01f;
+            _maxTimerForLight = Random.Range(2.1f, 4.1f);
+        }
     }
     void Update()
     {
-        _timer += Time.deltaTime;
-        if (_timer > _maxTimerForLight )
+        if (_isNight)
         {
-            StartCoroutine(Light());
+            _timer += Time.deltaTime;
+            if (_timer > _maxTimerForLight)
+            {
+                StartCoroutine(Light());
+            }
         }
     }
     

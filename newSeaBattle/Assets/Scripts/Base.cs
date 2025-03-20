@@ -13,7 +13,8 @@ public class Base : MonoBehaviour
     {
         if (collision.CompareTag("ship"))
         {
-            _shipsManager.CreateShip();
+            _uiManager.GameOver();
+            _shipsManager.IsGameOver();
             Destroy(collision.gameObject);
         }
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -13,6 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float _offset;
     [SerializeField] private GameObject _parentForBulletPrefab;
     [SerializeField] private Image _imagePause;
+    [SerializeField] private GameObject _buttonReturn;
+    [SerializeField] private GameObject _textWin;
     public Stack<GameObject> _bulletsUI { get; private set; }
 
     private void Awake()
@@ -29,6 +32,12 @@ public class UIManager : MonoBehaviour
     public void GameOver()
     {
         _textGameOver.gameObject.SetActive(true);
+        _buttonReturn.SetActive(true);
+    }
+
+    public void Win()
+    {
+        _textWin.SetActive(true);
     }
 
     public void PauseButton()
@@ -43,5 +52,10 @@ public class UIManager : MonoBehaviour
             _imagePause.gameObject.SetActive(false);
             Time.timeScale = 1;
         }
+    }
+
+    public void ReturnButton()
+    {     
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

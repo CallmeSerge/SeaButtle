@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class ShipsManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _tegForShipAwake;
+    [SerializeField] private GameObject[] _tegsForShipAwake;
     [SerializeField] private UIManager _uiManager;
     [SerializeField] private List<GameObject> _shipPrefabs;
+    private bool _isGameOver = false;
     private void Start()
     {
         CreateShip();
@@ -16,14 +17,26 @@ public class ShipsManager : MonoBehaviour
     {
         if (_shipPrefabs.Count > 0 && _uiManager._bulletsUI.Count > 0)
         {
-            int selectedShip = Random.Range(0, _shipPrefabs.Count);
-            GameObject newShip = Instantiate(_shipPrefabs[selectedShip], _tegForShipAwake.transform.position, Quaternion.identity);
-            newShip.GetComponent<ShipsHeathSystem>().Construct(this);
-            _shipPrefabs.RemoveAt(selectedShip);
+            if(_isGameOver == false)
+            {
+                int selectedShip = Random.Range(0, _shipPrefabs.Count);
+                GameObject newShip = Instantiate(_shipPrefabs[selectedShip], _tegsForShipAwake[Random.Range(0, _tegsForShipAwake.Length)].transform.position, Quaternion.identity);
+                newShip.GetComponent<ShipsHeathSystem>().Construct(this);
+                _shipPrefabs.RemoveAt(selectedShip);
+            }
+        }
+        else if (_shipPrefabs.Count == 0)
+        {
+            _uiManager.Win();
         }
         else
         {
             _uiManager.GameOver();
         }
+    }
+
+    public void IsGameOver()
+    {
+        _isGameOver = true;
     }
 }
