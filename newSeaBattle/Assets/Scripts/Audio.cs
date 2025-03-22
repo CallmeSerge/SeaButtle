@@ -9,16 +9,21 @@ public class Audio : MonoBehaviour
     [SerializeField] private AudioClip _torpedaGo;
     [SerializeField] private AudioClip _torpedaRecharge;
     [SerializeField] private AudioClip _torpedaBoom;
+    [SerializeField] private AudioClip _bulletBoom;
 
     public static AudioSource AudioSourceEffects;
+    public static AudioSource AudioSourceMusic;
     public static AudioClip TorpedaGo;
     public static AudioClip TorpedaRecharge;
     public static AudioClip TorpedaBoom;
+    public static AudioClip BulletBoom;
 
     private void Start()
     {
+        AudioSourceMusic = _audioSourceMusic;
         AudioSourceEffects = _audioSourceEffects;
         TorpedaGo = _torpedaGo;
         TorpedaBoom = _torpedaBoom;
+        BulletBoom = _bulletBoom;
     }
 }

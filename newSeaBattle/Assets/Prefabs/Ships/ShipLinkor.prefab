@@ -113,7 +113,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.64, y: -4.56, z: -7.8868375}
-  m_LocalScale: {x: 0.49088, y: 0.49088, z: 0.49088}
+  m_LocalScale: {x: 0.3954284, y: 0.3954284, z: 0.3954284}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9098243823283799686}
@@ -151,7 +151,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.045318604, y: 0.8882446}
+  m_Offset: {x: 0.012151718, y: 0.009250864}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -162,7 +162,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.2599487, y: 1.8701172}
+  m_Size: {x: 5.193615, y: 0.11212966}
   m_EdgeRadius: 0
 --- !u!114 &1333527806972737658
 MonoBehaviour:
@@ -189,5 +189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d110193d45deb42a56e090d7552d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 10
+  _hp: 20
   _shipBoomPrefab: {fileID: 2433282508523890284, guid: c36093efb93761d49990c59e77260edc, type: 3}
+  _shipFire: {fileID: 6033877225410109414, guid: b47cbebb5579ab7478e2d5588277af88, type: 3}
