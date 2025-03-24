@@ -19,12 +19,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] private ShipsManager _shipManager;
     [SerializeField] private TextMeshProUGUI _textShipCount;
     [SerializeField] private Image _redX;
+    [SerializeField] private GameObject _buttonNextLevel;
+    [SerializeField] private TextMeshProUGUI _textLevelName;
+    [SerializeField] private GameObject _imageStrelkaLeft, _imageStrelkaRight;
     public Stack<GameObject> _bulletsUI { get; private set; }
     private int _shipCount;
     private bool _isMusicOff = false;
 
     private void Awake()
     {
+        _textLevelName.text = SceneManager.GetActiveScene().name;
         _bulletsUI = new Stack<GameObject>(_shotsManager.CountOfBullet);
         for (int i = 0; i < _shotsManager.CountOfBullet; i++)
         {
@@ -37,6 +41,12 @@ public class UIManager : MonoBehaviour
         _textShipCount.text = _shipCount.ToString();
     }
 
+    private void Start()
+    {
+        Invoke("StrelkiAwake", _shipManager.TimeForNewShipAwake);
+        Invoke("StrelkiDelete", _shipManager.TimeForNewShipAwake + 3); 
+    }
+
     public void GameOver()
     {
         _textGameOver.gameObject.SetActive(true);
@@ -46,6 +56,7 @@ public class UIManager : MonoBehaviour
     public void Win()
     {
         _textWin.SetActive(true);
+        _buttonNextLevel.SetActive(true);
     }
 
     public void PauseButton()
@@ -102,5 +113,28 @@ public class UIManager : MonoBehaviour
         {
             GameOver();
         }
+    }
+
+    public void ButtonNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    private void StrelkiAwake()
+    {
+        if (_shipManager._tegsForShipAwake[0].transform.position.x < 0)
+        {
+            _imageStrelkaLeft.SetActive(true);
+        }
+        else
+        {
+            _imageStrelkaRight.SetActive(true);
+        }
+    }
+
+    private void StrelkiDelete()
+    {
+        _imageStrelkaLeft?.SetActive(false);
+        _imageStrelkaRight?.SetActive(false);
     }
 }
