@@ -25,6 +25,7 @@ public class ShipsManager : MonoBehaviour
                 int selectedShip = Random.Range(0, _shipPrefabs.Count);
                 _newShip = Instantiate(_shipPrefabs[selectedShip], _tegsForShipAwake[Random.Range(0, _tegsForShipAwake.Length)].transform.position, Quaternion.identity);
                 _newShip.GetComponent<ShipsHeathSystem>().Construct(this, _uiManager);
+                _newShip.GetComponent<Ships>().Construct(_tegsForShipAwake[0].transform.position);
                 _shipPrefabs.RemoveAt(selectedShip);
                 StartCoroutine(CreateShip()); 
             }

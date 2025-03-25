@@ -7,7 +7,7 @@ public class PeriskopMove : MonoBehaviour
 {
     [SerializeField] private float _periskopSpeed;
     [SerializeField] private Rigidbody2D _rb;
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.A))
         {

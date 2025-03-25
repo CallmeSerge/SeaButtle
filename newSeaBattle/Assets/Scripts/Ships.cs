@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class Ships : MonoBehaviour
 {
-    //[SerializeField] private float _shipSpeed;
+    private Vector2 _tegForShipPosition;
     
     void Update()
     {
-        transform.Translate(Vector2.right * Random.Range(1,3) * Time.deltaTime);
+        if (_tegForShipPosition.x > 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        transform.Translate(Vector2.right * Random.Range(1, 3) * Time.deltaTime);
+    }
+
+    public void Construct(Vector2 tegForShipPosition)
+    {
+        _tegForShipPosition = tegForShipPosition;
     }
 }
