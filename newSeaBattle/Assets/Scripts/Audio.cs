@@ -10,6 +10,7 @@ public class Audio : MonoBehaviour
     [SerializeField] private AudioClip _torpedaRecharge;
     [SerializeField] private AudioClip _torpedaBoom;
     [SerializeField] private AudioClip _bulletBoom;
+    [SerializeField] private AudioClip _grom;
 
     public static AudioSource AudioSourceEffects;
     public static AudioSource AudioSourceMusic;
@@ -17,6 +18,7 @@ public class Audio : MonoBehaviour
     public static AudioClip TorpedaRecharge;
     public static AudioClip TorpedaBoom;
     public static AudioClip BulletBoom;
+    public static AudioClip Grom;
 
     private void Start()
     {
@@ -25,5 +27,6 @@ public class Audio : MonoBehaviour
         TorpedaGo = _torpedaGo;
         TorpedaBoom = _torpedaBoom;
         BulletBoom = _bulletBoom;
+        Grom = _grom;
     }
 }

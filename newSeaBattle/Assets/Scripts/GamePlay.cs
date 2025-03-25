@@ -8,36 +8,38 @@ using UnityEngine.U2D;
 public class GamePlay : MonoBehaviour
 {
     [SerializeField] private Light2D _light;
+    [SerializeField] private Light2D _lighning;
     [SerializeField] private bool _isNight;
+    [SerializeField] private bool _isRaining;
     [SerializeField] private ParticleSystem _rainFall;
+    [SerializeField] private GameObject _aim;
     private float _maxTimerForLight;
     private float _timer;
     private void Start()
     {
         if (_isNight)
         {
-            _rainFall.Play();
-            _light.intensity = 0.01f;
+            _light.intensity = 0.02f;
             _maxTimerForLight = Random.Range(2.1f, 4.1f);
+            StartCoroutine(Light());
         }
-    }
-    void Update()
-    {
-        if (_isNight)
+        if (_isRaining)
         {
-            _timer += Time.deltaTime;
-            if (_timer > _maxTimerForLight)
-            {
-                StartCoroutine(Light());
-            }
+            _rainFall.Play();
         }
     }
     
     IEnumerator Light()
     {
-        _light.intensity = 0.2f;
-        yield return new WaitForSeconds(Random.Range(0.5f, 0.8f));
-        _light.intensity = 0.01f;
-        _timer = 0;
+        while(true)
+        {
+            yield return new WaitForSeconds(4);
+            Audio.AudioSourceEffects.PlayOneShot(Audio.Grom);
+            _lighning.transform.position = new Vector2(Random.Range(_aim.transform.position.x - 7, _aim.transform.position.x + 7), _aim.transform.position.y + 4);
+            _lighning.gameObject.SetActive(true);
+            yield return new WaitForSeconds(Random.Range(0.5f, 1));
+            _lighning.gameObject.SetActive(false);
+            _timer = 0;
+        }
     }
 }
