@@ -858,8 +858,8 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360.00003
   m_PointLightOuterAngle: 360.00003
-  m_PointLightInnerRadius: 2.22
-  m_PointLightOuterRadius: 12.37
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 16
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -2518,7 +2518,7 @@ MonoBehaviour:
   - {fileID: 1519130226}
   - {fileID: 11172228}
   _uiManager: {fileID: 615670567}
-  <TimeForNewShipAwake>k__BackingField: 3
+  <TimeForNewShipAwake>k__BackingField: 4
   <_shipPrefabs>k__BackingField:
   - {fileID: 1673375593716620781, guid: 50855cb292f802e4086df1e8647786bf, type: 3}
   - {fileID: 5347136740297500977, guid: 88d949c28e0ca324fb474dae6e5fc064, type: 3}
@@ -3601,9 +3601,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _light: {fileID: 619394801}
   _lighning: {fileID: 221415945}
-  _isNight: 1
   _rainFall: {fileID: 850822486}
   _aim: {fileID: 1331037098}
+  _fog: {fileID: 0}
+  _isNight: 1
+  _isRaining: 0
+  _isFog: 0
 --- !u!4 &1605907846
 Transform:
   m_ObjectHideFlags: 0

@@ -1376,6 +1376,7 @@ MonoBehaviour:
   _torpedaRecharge: {fileID: 8300000, guid: 52b0f9fbf4d457940a1ad584b957e059, type: 3}
   _torpedaBoom: {fileID: 8300000, guid: de78f895864a8c84db2f52f105829ed0, type: 3}
   _bulletBoom: {fileID: 8300000, guid: c7db8d412000dbe47b7911d531aff517, type: 3}
+  _grom: {fileID: 0}
 --- !u!4 &424185472
 Transform:
   m_ObjectHideFlags: 0
@@ -2631,7 +2632,7 @@ MonoBehaviour:
   - {fileID: 1519130226}
   - {fileID: 11172228}
   _uiManager: {fileID: 615670567}
-  <TimeForNewShipAwake>k__BackingField: 3
+  <TimeForNewShipAwake>k__BackingField: 4
   <_shipPrefabs>k__BackingField:
   - {fileID: 1673375593716620781, guid: 50855cb292f802e4086df1e8647786bf, type: 3}
   - {fileID: 5347136740297500977, guid: 88d949c28e0ca324fb474dae6e5fc064, type: 3}
@@ -3828,9 +3829,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _light: {fileID: 619394801}
   _lighning: {fileID: 221415945}
-  _isNight: 0
   _rainFall: {fileID: 850822486}
   _aim: {fileID: 1331037098}
+  _fog: {fileID: 0}
+  _isNight: 0
+  _isRaining: 0
+  _isFog: 0
 --- !u!4 &1605907846
 Transform:
   m_ObjectHideFlags: 0

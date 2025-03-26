@@ -22,13 +22,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _buttonNextLevel;
     [SerializeField] private TextMeshProUGUI _textLevelName;
     [SerializeField] private GameObject _imageStrelkaLeft, _imageStrelkaRight;
+    [SerializeField] private GameObject _buttonRussian, _buttonEnglish;
     public Stack<GameObject> _bulletsUI { get; private set; }
     private int _shipCount;
     private bool _isMusicOff = false;
+    private string _currentLanguage = "ru";
 
     private void Awake()
     {
-        _textLevelName.text = SceneManager.GetActiveScene().name;
+        if (_currentLanguage == "ru")
+        {
+            _buttonRussian.SetActive(true);
+            _textLevelName.text = "Уровень " + SceneManager.GetActiveScene().buildIndex + 1;
+        }
+
         _bulletsUI = new Stack<GameObject>(_shotsManager.CountOfBullet);
         for (int i = 0; i < _shotsManager.CountOfBullet; i++)
         {
@@ -102,7 +109,7 @@ public class UIManager : MonoBehaviour
         _shipCount -= 1;
         _textShipCount.text = _shipCount.ToString();
 
-            if ( _shipCount == 0 && _bulletsUI.Count > 0)
+            if ( _shipCount == 0 && _bulletsUI.Count >= 0)
             {
                 Win();
             }
@@ -136,5 +143,23 @@ public class UIManager : MonoBehaviour
     {
         _imageStrelkaLeft?.SetActive(false);
         _imageStrelkaRight?.SetActive(false);
+    }
+
+    public void ButtonLanguage()
+    {
+        if (_currentLanguage == "ru")
+        {
+            _currentLanguage = "en";
+            _textLevelName.text = "Level " + SceneManager.GetActiveScene().buildIndex + 1;
+            _buttonEnglish.SetActive(true);
+            _buttonRussian.SetActive(false);
+        }
+        else if (_currentLanguage == "en")
+        {
+            _currentLanguage = "ru";
+            _textLevelName.text = "Уровень " + SceneManager.GetActiveScene().buildIndex + 1;
+            _buttonEnglish.SetActive(false);
+            _buttonRussian.SetActive(true);
+        }
     }
 }

@@ -18,7 +18,6 @@ public class ShipsHeathSystem : MonoBehaviour
     public void TakeDamage(float damage)
     {
         _hp = _hp - damage;
-        _uiManager.CheckFail();
         if (_hp <= 0)
         {
             Audio.AudioSourceEffects.PlayOneShot(Audio.TorpedaBoom);
@@ -26,15 +25,17 @@ public class ShipsHeathSystem : MonoBehaviour
             ParticleSystem shipBoom = Instantiate(_shipBoomPrefab);
             shipBoom.transform.position = transform.position;
             shipBoom.Play();
-            _uiManager.CheckShipCountAndCheckWin();
             Destroy(gameObject);
+            _uiManager.CheckShipCountAndCheckWin();
+            _uiManager.CheckFail();
         }
         else 
         {
             Audio.AudioSourceEffects.PlayOneShot(Audio.BulletBoom);
             ParticleSystem shipFire = Instantiate(_shipFire, transform.position, Quaternion.identity);
             shipFire.transform.SetParent(transform);
-            shipFire.Play(); 
+            shipFire.Play();
+            _uiManager.CheckFail();
         }
     }
 }

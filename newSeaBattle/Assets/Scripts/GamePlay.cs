@@ -9,23 +9,30 @@ public class GamePlay : MonoBehaviour
 {
     [SerializeField] private Light2D _light;
     [SerializeField] private Light2D _lighning;
-    [SerializeField] private bool _isNight;
-    [SerializeField] private bool _isRaining;
     [SerializeField] private ParticleSystem _rainFall;
     [SerializeField] private GameObject _aim;
+    [SerializeField] private ParticleSystem _fog;
+    [SerializeField] private bool _isNight;
+    [SerializeField] private bool _isRaining;
+    [SerializeField] private bool _isFog;
     private float _maxTimerForLight;
     private float _timer;
+
     private void Start()
     {
         if (_isNight)
         {
-            _light.intensity = 0.02f;
+            _light.intensity = 0.015f;
             _maxTimerForLight = Random.Range(2.1f, 4.1f);
             StartCoroutine(Light());
         }
         if (_isRaining)
         {
             _rainFall.Play();
+        }
+        if (_isFog)
+        {
+            _fog.Play();
         }
     }
     
