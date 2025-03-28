@@ -4,13 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using YG;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textGameOver;
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private GameObject _startTegForBullet;
-    [SerializeField] private float _offset;
     [SerializeField] private GameObject _parentForBulletPrefab;
     [SerializeField] private Image _imagePause;
     [SerializeField] private GameObject _buttonReturn;
@@ -23,17 +23,24 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _textLevelName;
     [SerializeField] private GameObject _imageStrelkaLeft, _imageStrelkaRight;
     [SerializeField] private GameObject _buttonRussian, _buttonEnglish;
+    [SerializeField] private GameObject _buttonRight, _buttonLeft;
     public Stack<GameObject> _bulletsUI { get; private set; }
     private int _shipCount;
     private bool _isMusicOff = false;
     private string _currentLanguage = "ru";
+    private float _offset = 50;
 
     private void Awake()
     {
+        if (YandexGame.EnvironmentData.isMobile)
+        {
+            _buttonLeft.SetActive(true);
+            _buttonRight.SetActive(true);
+        }
         if (_currentLanguage == "ru")
         {
             _buttonRussian.SetActive(true);
-            _textLevelName.text = "Уровень " + SceneManager.GetActiveScene().buildIndex + 1;
+            _textLevelName.text = "Уровень " + SceneManager.GetActiveScene().buildIndex;
         }
 
         _bulletsUI = new Stack<GameObject>(_shotsManager.CountOfBullet);
@@ -64,6 +71,8 @@ public class UIManager : MonoBehaviour
     {
         _textWin.SetActive(true);
         _buttonNextLevel.SetActive(true);
+        YandexGame.savesData.sceneForLoad = SceneManager.GetActiveScene().buildIndex + 1;
+        YandexGame.SaveProgress();
     }
 
     public void PauseButton()
@@ -125,6 +134,7 @@ public class UIManager : MonoBehaviour
     public void ButtonNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        YandexGame.FullscreenShow();
     }
 
     private void StrelkiAwake()
@@ -150,14 +160,14 @@ public class UIManager : MonoBehaviour
         if (_currentLanguage == "ru")
         {
             _currentLanguage = "en";
-            _textLevelName.text = "Level " + SceneManager.GetActiveScene().buildIndex + 1;
+            _textLevelName.text = "Level " + SceneManager.GetActiveScene().buildIndex;
             _buttonEnglish.SetActive(true);
             _buttonRussian.SetActive(false);
         }
         else if (_currentLanguage == "en")
         {
             _currentLanguage = "ru";
-            _textLevelName.text = "Уровень " + SceneManager.GetActiveScene().buildIndex + 1;
+            _textLevelName.text = "Уровень " + SceneManager.GetActiveScene().buildIndex;
             _buttonEnglish.SetActive(false);
             _buttonRussian.SetActive(true);
         }

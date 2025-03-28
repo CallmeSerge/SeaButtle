@@ -4,6 +4,8 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.U2D;
+using YG;
+using UnityEngine.SceneManagement;
 
 public class GamePlay : MonoBehaviour
 {
