@@ -45,7 +45,7 @@ public class ShotsManager : MonoBehaviour
         {
             _timeRecharge += Time.deltaTime;
         }
-        if (Input.GetKeyDown(KeyCode.K) && _timeRecharge >= _timeRechargeInInspector && _bulletsUIInShotsManager.Count > 0)
+        if (Input.GetKeyDown(KeyCode.K) && _timeRecharge >= _timeRechargeInInspector && _bulletsUIInShotsManager.Count > 0 && _uiManager._isGameOver == false)
         {
             GameObject bullet = Instantiate(_bulletPrefab, _gun.transform.position, Quaternion.identity);
             bullet.GetComponent<Bullet>().Construct(_uiManager);

@@ -8,13 +8,13 @@ using YG;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _textGameOver;
+    [SerializeField] private GameObject _imageGameOverRussian, _imageGameOverEnglish;
+    [SerializeField] private GameObject _imageWinRussian, _imageWinEnglish;
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private GameObject _startTegForBullet;
     [SerializeField] private GameObject _parentForBulletPrefab;
     [SerializeField] private Image _imagePause;
     [SerializeField] private GameObject _buttonReturn;
-    [SerializeField] private GameObject _textWin;
     [SerializeField] private ShotsManager _shotsManager;
     [SerializeField] private ShipsManager _shipManager;
     [SerializeField] private TextMeshProUGUI _textShipCount;
@@ -24,7 +24,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _imageStrelkaLeft, _imageStrelkaRight;
     [SerializeField] private GameObject _buttonRussian, _buttonEnglish;
     [SerializeField] private GameObject _buttonRight, _buttonLeft;
+    [SerializeField] private GameObject _buttonPause;
+    [SerializeField] private GameObject _buttonMusic;
+    [SerializeField] private GameObject _buttonLanguageRussian;
+    [SerializeField] private GameObject _buttonLanguageEnglish;  
+
     public Stack<GameObject> _bulletsUI { get; private set; }
+    public bool _isGameOver { get; private set; } = false;
     private int _shipCount;
     private bool _isMusicOff = false;
     private string _currentLanguage = "ru";
@@ -63,14 +69,44 @@ public class UIManager : MonoBehaviour
 
     public void GameOver()
     {
-        _textGameOver.gameObject.SetActive(true);
-        _buttonReturn.SetActive(true);
+        if (_isGameOver == false)
+        {
+            if (_currentLanguage == "ru")
+            {
+                _imageGameOverRussian.SetActive(true);
+            }
+            else
+            {
+                _imageGameOverEnglish.SetActive(true);
+            }
+            _buttonReturn.SetActive(true);
+            _buttonPause.SetActive(false);
+            _buttonMusic.SetActive(false);
+            _buttonLanguageRussian.SetActive(false);
+            _buttonLanguageEnglish.SetActive(false);
+            Audio.AudioSourceMusic.enabled = false;
+            Audio.AudioSourceEffects.enabled = false;
+            _isGameOver = true;
+        }
     }
 
     public void Win()
     {
-        _textWin.SetActive(true);
+        if(_currentLanguage == "ru")
+        {
+            _imageWinRussian.SetActive(true);
+        }
+        else
+        {
+            _imageWinEnglish.SetActive(true);
+        }
         _buttonNextLevel.SetActive(true);
+        _buttonPause.SetActive(false);
+        _buttonMusic.SetActive(false);
+        _buttonLanguageRussian.SetActive(false);
+        _buttonLanguageEnglish.SetActive(false);
+        Audio.AudioSourceMusic.enabled = false;
+        Audio.AudioSourceEffects.enabled = false;
         YandexGame.savesData.sceneForLoad = SceneManager.GetActiveScene().buildIndex + 1;
         YandexGame.SaveProgress();
     }
