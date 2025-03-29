@@ -14,6 +14,7 @@ public class PeriskopMove : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.A))
             {
+                _uiManager.StartTextOff();
                 _rb.AddForce(Vector2.left * _periskopSpeed);
             }
             if (transform.position.x < -21)
@@ -23,6 +24,7 @@ public class PeriskopMove : MonoBehaviour
 
             if (Input.GetKey(KeyCode.D))
             {
+                _uiManager.StartTextOff();
                 _rb.AddForce(Vector2.right * _periskopSpeed);
             }
             if (transform.position.x > 21)

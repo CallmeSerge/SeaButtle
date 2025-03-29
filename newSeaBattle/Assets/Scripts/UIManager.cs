@@ -26,27 +26,48 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _buttonRight, _buttonLeft;
     [SerializeField] private GameObject _buttonPause;
     [SerializeField] private GameObject _buttonMusic;
-    [SerializeField] private GameObject _buttonLanguageRussian;
-    [SerializeField] private GameObject _buttonLanguageEnglish;  
+    [SerializeField] private GameObject _startTextRussian, _startTextEnglish; 
+    
 
     public Stack<GameObject> _bulletsUI { get; private set; }
     public bool _isGameOver { get; private set; } = false;
     private int _shipCount;
     private bool _isMusicOff = false;
-    private string _currentLanguage = "ru";
+    private string _currentLanguage;
     private float _offset = 50;
 
     private void Awake()
     {
+        if (YandexGame.savesData.saveLanguage == null)
+        {
+                _buttonRussian.SetActive(true);
+                _textLevelName.text = "Уровень " + SceneManager.GetActiveScene().buildIndex;
+                YandexGame.savesData.saveLanguage = "ru";
+                YandexGame.SaveProgress();
+                _startTextRussian.SetActive(true);
+        }
+        else
+        {
+                if (YandexGame.savesData.saveLanguage == "ru")
+                    {
+                        _buttonRussian.SetActive(true);
+                        _textLevelName.text = "Уровень " + SceneManager.GetActiveScene().buildIndex;
+                        _startTextRussian.SetActive(true);
+
+            }
+            else if (YandexGame.savesData.saveLanguage == "en")
+                    {
+                        _buttonEnglish.SetActive(true);
+                        _textLevelName.text = "Level " + SceneManager.GetActiveScene().buildIndex;
+                        _startTextEnglish.SetActive(true);  
+                    }
+        }
+
+
         if (YandexGame.EnvironmentData.isMobile)
         {
             _buttonLeft.SetActive(true);
             _buttonRight.SetActive(true);
-        }
-        if (_currentLanguage == "ru")
-        {
-            _buttonRussian.SetActive(true);
-            _textLevelName.text = "Уровень " + SceneManager.GetActiveScene().buildIndex;
         }
 
         _bulletsUI = new Stack<GameObject>(_shotsManager.CountOfBullet);
@@ -67,7 +88,7 @@ public class UIManager : MonoBehaviour
         Invoke("StrelkiDelete", _shipManager.TimeForNewShipAwake + 3); 
     }
 
-    public void GameOver()
+    public IEnumerator GameOver()
     {
         if (_isGameOver == false)
         {
@@ -79,20 +100,21 @@ public class UIManager : MonoBehaviour
             {
                 _imageGameOverEnglish.SetActive(true);
             }
-            _buttonReturn.SetActive(true);
             _buttonPause.SetActive(false);
             _buttonMusic.SetActive(false);
-            _buttonLanguageRussian.SetActive(false);
-            _buttonLanguageEnglish.SetActive(false);
+            _buttonRussian.SetActive(false);
+            _buttonEnglish.SetActive(false);
             Audio.AudioSourceMusic.enabled = false;
             Audio.AudioSourceEffects.enabled = false;
             _isGameOver = true;
+            yield return new WaitForSeconds(2);
+            _buttonReturn.SetActive(true);
         }
     }
 
-    public void Win()
+    IEnumerator Win()
     {
-        if(_currentLanguage == "ru")
+        if (_currentLanguage == "ru")
         {
             _imageWinRussian.SetActive(true);
         }
@@ -100,15 +122,16 @@ public class UIManager : MonoBehaviour
         {
             _imageWinEnglish.SetActive(true);
         }
-        _buttonNextLevel.SetActive(true);
         _buttonPause.SetActive(false);
         _buttonMusic.SetActive(false);
-        _buttonLanguageRussian.SetActive(false);
-        _buttonLanguageEnglish.SetActive(false);
+        _buttonRussian.SetActive(false);
+        _buttonEnglish.SetActive(false);
         Audio.AudioSourceMusic.enabled = false;
         Audio.AudioSourceEffects.enabled = false;
         YandexGame.savesData.sceneForLoad = SceneManager.GetActiveScene().buildIndex + 1;
         YandexGame.SaveProgress();
+        yield return new WaitForSeconds(2);
+        _buttonNextLevel.SetActive(true);
     }
 
     public void PauseButton()
@@ -156,21 +179,28 @@ public class UIManager : MonoBehaviour
 
             if ( _shipCount == 0 && _bulletsUI.Count >= 0)
             {
-                Win();
+                StartCoroutine(Win());
             }
     } 
     public void CheckFail()
     {
         if (_shipCount > 0 && _bulletsUI.Count == 0)
         {
-            GameOver();
+            StartCoroutine(GameOver());
         }
     }
 
     public void ButtonNextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        YandexGame.FullscreenShow();
+        if (SceneManager.GetActiveScene().buildIndex != 20)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            YandexGame.FullscreenShow();
+        }
+        else
+        {
+            SceneManager.LoadScene("EndGame");
+        }
     }
 
     private void StrelkiAwake()
@@ -193,19 +223,25 @@ public class UIManager : MonoBehaviour
 
     public void ButtonLanguage()
     {
-        if (_currentLanguage == "ru")
+        if (_buttonRussian.activeSelf == true)
         {
-            _currentLanguage = "en";
+            YandexGame.savesData.saveLanguage = "en";
             _textLevelName.text = "Level " + SceneManager.GetActiveScene().buildIndex;
             _buttonEnglish.SetActive(true);
             _buttonRussian.SetActive(false);
         }
-        else if (_currentLanguage == "en")
+        else if (_buttonEnglish.activeSelf == true)
         {
-            _currentLanguage = "ru";
+            YandexGame.savesData.saveLanguage = "ru";
             _textLevelName.text = "Уровень " + SceneManager.GetActiveScene().buildIndex;
             _buttonEnglish.SetActive(false);
             _buttonRussian.SetActive(true);
         }
+    }
+
+    public void StartTextOff()
+    {
+        _startTextRussian?.SetActive(false);
+        _startTextEnglish?.SetActive(false);
     }
 }
