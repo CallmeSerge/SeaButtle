@@ -26,9 +26,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _buttonRight, _buttonLeft;
     [SerializeField] private GameObject _buttonPause;
     [SerializeField] private GameObject _buttonMusic;
-    [SerializeField] private GameObject _startTextRussian, _startTextEnglish; 
-    
-
+    [SerializeField] private GameObject _startTextRussian, _startTextEnglish;
+    [SerializeField] private ParticleSystem _confettiPrefab;
+    [SerializeField] private GameObject _aim;
     public Stack<GameObject> _bulletsUI { get; private set; }
     public bool _isGameOver { get; private set; } = false;
     private int _shipCount;
@@ -100,6 +100,7 @@ public class UIManager : MonoBehaviour
             {
                 _imageGameOverEnglish.SetActive(true);
             }
+            Audio.AudioSourceWinFall.PlayOneShot(Audio.GameOver);
             _buttonPause.SetActive(false);
             _buttonMusic.SetActive(false);
             _buttonRussian.SetActive(false);
@@ -122,6 +123,9 @@ public class UIManager : MonoBehaviour
         {
             _imageWinEnglish.SetActive(true);
         }
+        ParticleSystem confetti = Instantiate(_confettiPrefab, _aim.transform.position, Quaternion.identity);
+        confetti.Play();
+        Audio.AudioSourceWinFall.PlayOneShot(Audio.Win);
         _buttonPause.SetActive(false);
         _buttonMusic.SetActive(false);
         _buttonRussian.SetActive(false);
@@ -130,7 +134,7 @@ public class UIManager : MonoBehaviour
         Audio.AudioSourceEffects.enabled = false;
         YandexGame.savesData.sceneForLoad = SceneManager.GetActiveScene().buildIndex + 1;
         YandexGame.SaveProgress();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(4);
         _buttonNextLevel.SetActive(true);
     }
 
