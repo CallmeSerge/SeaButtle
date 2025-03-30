@@ -2459,7 +2459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d327f103f2dfcd64e8d648f981c1fb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CountOfBullet>k__BackingField: 16
+  <CountOfBullet>k__BackingField: 18
   _bulletPrefab: {fileID: 19026680777152516, guid: c46bc4935f002b743838aaad9946ed75, type: 3}
   _gun: {fileID: 1878386102}
   _timeRechargeInInspector: 3
@@ -2822,7 +2822,18 @@ MonoBehaviour:
   _uiManager: {fileID: 615670567}
   <TimeForNewShipAwake>k__BackingField: 4
   <_shipPrefabs>k__BackingField:
+  - {fileID: 8391683343022483388, guid: 794caea2938e89a4aa652d3d559f3d7d, type: 3}
   - {fileID: 1673375593716620781, guid: 50855cb292f802e4086df1e8647786bf, type: 3}
+  - {fileID: 5404439997797648153, guid: 8ed54af1d40e38d438a6b37f9beb266b, type: 3}
+  - {fileID: 1673375593716620781, guid: 50855cb292f802e4086df1e8647786bf, type: 3}
+  - {fileID: 2796782053615338528, guid: 7a722f672ac427249a33040960adb6e5, type: 3}
+  - {fileID: 5404439997797648153, guid: 8ed54af1d40e38d438a6b37f9beb266b, type: 3}
+  - {fileID: 5404439997797648153, guid: 8ed54af1d40e38d438a6b37f9beb266b, type: 3}
+  - {fileID: 1673375593716620781, guid: 50855cb292f802e4086df1e8647786bf, type: 3}
+  - {fileID: 7677203906997916387, guid: 47a9986ad8b216e459659b90b131179b, type: 3}
+  - {fileID: 5404439997797648153, guid: 8ed54af1d40e38d438a6b37f9beb266b, type: 3}
+  - {fileID: 8391683343022483388, guid: 794caea2938e89a4aa652d3d559f3d7d, type: 3}
+  - {fileID: 7677203906997916387, guid: 47a9986ad8b216e459659b90b131179b, type: 3}
   <_newShip>k__BackingField: {fileID: 0}
 --- !u!4 &831899832
 Transform:
