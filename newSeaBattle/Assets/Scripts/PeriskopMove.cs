@@ -12,7 +12,7 @@ public class PeriskopMove : MonoBehaviour
     {
         if (_uiManager._isGameOver == false)
         {
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) || _uiManager._isMovingLeft)
             {
                 _uiManager.StartTextOff();
                 _rb.AddForce(Vector2.left * _periskopSpeed);
@@ -22,7 +22,7 @@ public class PeriskopMove : MonoBehaviour
                 transform.position = new Vector2(-21, transform.position.y);
             }
 
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) || _uiManager._isMovingRight)
             {
                 _uiManager.StartTextOff();
                 _rb.AddForce(Vector2.right * _periskopSpeed);

@@ -45,7 +45,16 @@ public class ShotsManager : MonoBehaviour
         {
             _timeRecharge += Time.deltaTime;
         }
-        if (Input.GetKeyDown(KeyCode.K) && _timeRecharge >= _timeRechargeInInspector && _bulletsUIInShotsManager.Count > 0 && _uiManager._isGameOver == false)
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Shot();
+        }
+        _rechargeImageLeft.fillAmount = _timeRecharge / _timeRechargeInInspector;
+        _rechargeImageRight.fillAmount = _timeRecharge / _timeRechargeInInspector;    
+    }
+    public void Shot()
+    {
+        if (_timeRecharge >= _timeRechargeInInspector && _bulletsUIInShotsManager.Count > 0 && _uiManager._isGameOver == false)
         {
             _uiManager.StartTextOff();
             GameObject bullet = Instantiate(_bulletPrefab, _gun.transform.position, Quaternion.identity);
@@ -55,7 +64,5 @@ public class ShotsManager : MonoBehaviour
             vibraniiBulletUI.SetActive(false);
             _timeRecharge = 0;
         }
-        _rechargeImageLeft.fillAmount = _timeRecharge / _timeRechargeInInspector;
-        _rechargeImageRight.fillAmount = _timeRecharge / _timeRechargeInInspector;    
     }
 }

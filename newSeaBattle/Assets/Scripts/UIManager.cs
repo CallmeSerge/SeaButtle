@@ -30,6 +30,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private ParticleSystem _confettiPrefab;
     [SerializeField] private GameObject _aim;
     public Stack<GameObject> _bulletsUI { get; private set; }
+    public bool _isMovingRight { get; private set; } = false;
+    public bool _isMovingLeft { get; private set; } = false;
     public bool _isGameOver { get; private set; } = false;
     private int _shipCount;
     private bool _isMusicOff = false;
@@ -247,5 +249,19 @@ public class UIManager : MonoBehaviour
     {
         _startTextRussian?.SetActive(false);
         _startTextEnglish?.SetActive(false);
+    }
+
+    public void AimMoveRight()
+    {
+        _isMovingRight = true;
+    }
+    public void AimMoveLeft()
+    {
+        _isMovingLeft = true;
+    }
+    public void AimStop()
+    {
+        _isMovingLeft = false;
+        _isMovingRight = false;
     }
 }
