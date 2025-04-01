@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _startTextRussian, _startTextEnglish;
     [SerializeField] private ParticleSystem _confettiPrefab;
     [SerializeField] private GameObject _aim;
+    [SerializeField] private GameObject _buttonFire;
     public Stack<GameObject> _bulletsUI { get; private set; }
     public bool _isMovingRight { get; private set; } = false;
     public bool _isMovingLeft { get; private set; } = false;
@@ -70,6 +71,7 @@ public class UIManager : MonoBehaviour
         {
             _buttonLeft.SetActive(true);
             _buttonRight.SetActive(true);
+            _buttonFire.SetActive(true);
         }
 
         _bulletsUI = new Stack<GameObject>(_shotsManager.CountOfBullet);
