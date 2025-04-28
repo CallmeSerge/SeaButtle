@@ -467,6 +467,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonReturnToFirstLevel: {fileID: 1398668406}
+  _textWinRussian: {fileID: 705909854}
+  _textWinEnglish: {fileID: 92996507}
 --- !u!1 &705909854
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,7 +22,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _buttonNextLevel;
     [SerializeField] private TextMeshProUGUI _textLevelName;
     [SerializeField] private GameObject _imageStrelkaLeft, _imageStrelkaRight;
-    [SerializeField] private GameObject _buttonRussian, _buttonEnglish;
     [SerializeField] private GameObject _buttonRight, _buttonLeft;
     [SerializeField] private GameObject _buttonPause;
     [SerializeField] private GameObject _buttonMusic;
@@ -36,36 +35,26 @@ public class UIManager : MonoBehaviour
     public bool _isGameOver { get; private set; } = false;
     private int _shipCount;
     private bool _isMusicOff = false;
-    private string _currentLanguage;
     private float _offset = 50;
 
     private void Awake()
     {
-        if (YandexGame.savesData.saveLanguage == null)
-        {
-                _buttonRussian.SetActive(true);
-                _textLevelName.text = "Уровень " + SceneManager.GetActiveScene().buildIndex;
-                YandexGame.savesData.saveLanguage = "ru";
-                YandexGame.SaveProgress();
-                _startTextRussian.SetActive(true);
-        }
-        else
-        {
-                if (YandexGame.savesData.saveLanguage == "ru")
-                    {
-                        _buttonRussian.SetActive(true);
+       if (YandexGame.savesData.saveLanguage == "ru")
+             {
                         _textLevelName.text = "Уровень " + SceneManager.GetActiveScene().buildIndex;
-                        _startTextRussian.SetActive(true);
-
-            }
-            else if (YandexGame.savesData.saveLanguage == "en")
-                    {
-                        _buttonEnglish.SetActive(true);
+                         if (YandexGame.EnvironmentData.isDesktop)
+                             {
+                                _startTextRussian.SetActive(true);
+                             }
+             }
+       else if (YandexGame.savesData.saveLanguage == "en")
+             {
                         _textLevelName.text = "Level " + SceneManager.GetActiveScene().buildIndex;
-                        _startTextEnglish.SetActive(true);  
-                    }
-        }
-
+                         if (YandexGame.EnvironmentData.isDesktop)
+                            {
+                               _startTextEnglish.SetActive(true);
+                            }
+             }  
 
         if (YandexGame.EnvironmentData.isMobile)
         {
@@ -96,7 +85,7 @@ public class UIManager : MonoBehaviour
     {
         if (_isGameOver == false)
         {
-            if (_currentLanguage == "ru")
+            if (YandexGame.savesData.saveLanguage == "ru")
             {
                 _imageGameOverRussian.SetActive(true);
             }
@@ -107,8 +96,6 @@ public class UIManager : MonoBehaviour
             Audio.AudioSourceWinFall.PlayOneShot(Audio.GameOver);
             _buttonPause.SetActive(false);
             _buttonMusic.SetActive(false);
-            _buttonRussian.SetActive(false);
-            _buttonEnglish.SetActive(false);
             Audio.AudioSourceMusic.enabled = false;
             Audio.AudioSourceEffects.enabled = false;
             _isGameOver = true;
@@ -119,7 +106,7 @@ public class UIManager : MonoBehaviour
 
     IEnumerator Win()
     {
-        if (_currentLanguage == "ru")
+        if (YandexGame.savesData.saveLanguage == "ru")
         {
             _imageWinRussian.SetActive(true);
         }
@@ -132,8 +119,6 @@ public class UIManager : MonoBehaviour
         Audio.AudioSourceWinFall.PlayOneShot(Audio.Win);
         _buttonPause.SetActive(false);
         _buttonMusic.SetActive(false);
-        _buttonRussian.SetActive(false);
-        _buttonEnglish.SetActive(false);
         Audio.AudioSourceMusic.enabled = false;
         Audio.AudioSourceEffects.enabled = false;
         YandexGame.savesData.sceneForLoad = SceneManager.GetActiveScene().buildIndex + 1;
@@ -227,24 +212,6 @@ public class UIManager : MonoBehaviour
     {
         _imageStrelkaLeft?.SetActive(false);
         _imageStrelkaRight?.SetActive(false);
-    }
-
-    public void ButtonLanguage()
-    {
-        if (_buttonRussian.activeSelf == true)
-        {
-            YandexGame.savesData.saveLanguage = "en";
-            _textLevelName.text = "Level " + SceneManager.GetActiveScene().buildIndex;
-            _buttonEnglish.SetActive(true);
-            _buttonRussian.SetActive(false);
-        }
-        else if (_buttonEnglish.activeSelf == true)
-        {
-            YandexGame.savesData.saveLanguage = "ru";
-            _textLevelName.text = "Уровень " + SceneManager.GetActiveScene().buildIndex;
-            _buttonEnglish.SetActive(false);
-            _buttonRussian.SetActive(true);
-        }
     }
 
     public void StartTextOff()
